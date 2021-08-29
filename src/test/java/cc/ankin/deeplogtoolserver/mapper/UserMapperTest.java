@@ -1,8 +1,10 @@
 package cc.ankin.deeplogtoolserver.mapper;
 
 import cc.ankin.deeplogtoolserver.pojo.User;
+import cc.ankin.deeplogtoolserver.utils.MainUtils;
 import cc.ankin.deeplogtoolserver.utils.MybatisUtils;
 import cc.ankin.deeplogtoolserver.mapper.UserMapper;
+import cc.ankin.deeplogtoolserver.utils.ToolUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -51,7 +53,7 @@ public class UserMapperTest {
     public void insertUser(){
         SqlSession  sqlSession = MybatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = new User(UUID.randomUUID().toString(),"15098144981","123");
+        User user = new User(UUID.randomUUID().toString(),"15098144981", ToolUtils.pwdEncoder("2312"));
         userMapper.insetUser(user);
         sqlSession.commit();
         sqlSession.close();

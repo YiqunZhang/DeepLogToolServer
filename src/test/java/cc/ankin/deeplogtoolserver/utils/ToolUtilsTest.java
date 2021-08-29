@@ -9,5 +9,10 @@ public class ToolUtilsTest {
         System.out.println(pwd);
     }
 
+    @Test
+    public void getCurrentTimestamp(){
+        Long timestamp = ToolUtils.getCurrentTimestamp();
+        System.out.println(timestamp);
+    }
 
 }

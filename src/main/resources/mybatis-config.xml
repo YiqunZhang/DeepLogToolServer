@@ -24,5 +24,7 @@
     <mappers>
         <mapper class="cc.ankin.deeplogtoolserver.mapper.UserMapper"/>
         <mapper class="cc.ankin.deeplogtoolserver.mapper.LogMapper"/>
+        <mapper class="cc.ankin.deeplogtoolserver.mapper.LogDetailMapper"/>
+        <mapper class="cc.ankin.deeplogtoolserver.mapper.ConfigMapper"/>
     </mappers>
 </configuration>

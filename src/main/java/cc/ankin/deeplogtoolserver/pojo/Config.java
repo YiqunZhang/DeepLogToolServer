@@ -4,15 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Log {
+public class Config {
     private String id;
-    private String userId;
-    private Long createTime;
-    private String title;
-    private String comments;
-    private Integer done;
+    private String logId;
+    private String name;
+    private String value;
 }

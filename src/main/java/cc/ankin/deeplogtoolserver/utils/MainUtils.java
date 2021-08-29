@@ -1,8 +1,10 @@
 package cc.ankin.deeplogtoolserver.utils;
 
+import cc.ankin.deeplogtoolserver.mapper.ConfigMapper;
 import cc.ankin.deeplogtoolserver.mapper.LogDetailMapper;
 import cc.ankin.deeplogtoolserver.mapper.LogMapper;
 import cc.ankin.deeplogtoolserver.mapper.UserMapper;
+import cc.ankin.deeplogtoolserver.pojo.Config;
 import cc.ankin.deeplogtoolserver.pojo.Log;
 import cc.ankin.deeplogtoolserver.pojo.LogDetail;
 import cc.ankin.deeplogtoolserver.pojo.User;
@@ -80,10 +82,7 @@ public class MainUtils {
                 timestamp,
                 title,
                 comments,
-                0,
-                0.0,
-                0,
-                0.0
+                0
         );
 
         SqlSession sqlSession = MybatisUtils.getSqlSession();
@@ -97,7 +96,7 @@ public class MainUtils {
 
 
     @ResponseBody
-    @RequestMapping("/whoAmI")
+    @RequestMapping("/uploadLogDetail")
     public String uploadLogDetail(String logId, Integer epoch, Double accuracy,
                                    Double trainLoss, Double testLoss, Double learningRate,
                                    Double startTime, Double trainTime, Double testTime){
@@ -124,6 +123,33 @@ public class MainUtils {
         sqlSession.close();
 
         return id;
+    }
+
+    @ResponseBody
+    @RequestMapping("/uploadConfig")
+    public Integer uploadConfig(String logId, String configText){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        ConfigMapper configMapper = sqlSession.getMapper(ConfigMapper.class);
+
+        String[] configTextArray = configText.split("\n");
+        for (String configLine:configTextArray) {
+            String[] configTag = configLine.split(":");
+            Config config = new Config(
+                    ToolUtils.getRandomUUID(),
+                    logId,
+                    configTag[0],
+                    configTag[1]
+            );
+
+            configMapper.insertConfig(config);
+
+        }
+
+
+        sqlSession.commit();
+        sqlSession.close();
+
+        return 0;
     }
 
 
