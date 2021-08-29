@@ -15,8 +15,5 @@ public class Log {
     private String title;
     private String comments;
     private Integer done;
-    private Double accuracyBest;
-    private Integer epochBest;
-    private Double epochNow;
 
 }
