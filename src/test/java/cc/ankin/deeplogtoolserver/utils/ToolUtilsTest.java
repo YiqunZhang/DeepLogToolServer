@@ -8,4 +8,6 @@ public class ToolUtilsTest {
         String pwd = ToolUtils.pwdEncoder("123");
         System.out.println(pwd);
     }
+
+
 }

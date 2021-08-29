@@ -17,5 +17,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().logout(); // 任何请求都开启认证
 
+        http.csrf().disable();
+
     }
 }

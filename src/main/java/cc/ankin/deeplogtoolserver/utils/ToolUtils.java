@@ -2,7 +2,9 @@ package cc.ankin.deeplogtoolserver.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.sql.Timestamp;
 import java.util.Random;
+import java.util.UUID;
 
 public class ToolUtils {
 
@@ -21,5 +23,12 @@ public class ToolUtils {
         return bCryptPasswordEncoder.encode(pwd);
     }
 
+    public static String getRandomUUID(){
+        return UUID.randomUUID().toString();
+    }
+
+    public static Long getCurrentTimestamp(){
+        return new Timestamp(System.currentTimeMillis()).getTime();
+    }
 
 }

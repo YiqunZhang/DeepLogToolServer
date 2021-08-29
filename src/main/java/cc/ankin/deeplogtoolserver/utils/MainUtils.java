@@ -81,30 +81,42 @@ public class MainUtils {
 
     @ResponseBody
     @RequestMapping("/createNewLog")
-    public Object createNewLog() {
+    public Object createNewLog(String title, String comments, Long timestamp) {
+
+        Log log = new Log(
+                ToolUtils.getRandomUUID(),
+                whoAmI().getId(),
+                timestamp,
+                title,
+                comments,
+                0,
+                0.0,
+                0,
+                0.0
+        );
+
         SqlSession sqlSession = MybatisUtils.getSqlSession();
-
-        Log log = new Log();
-
-
         LogMapper logMapper = sqlSession.getMapper(LogMapper.class);
         logMapper.insertLog(log);
+        sqlSession.commit();
         sqlSession.close();
 
-        return "";
-
+        return "success";
     }
+
+
 
     @ResponseBody
-    @RequestMapping("/a")
-    public Object a(){
-        return getCurrentUser();
-    }
-
-    public User getCurrentUser(){
+    @RequestMapping("/whoAmI")
+    public User whoAmI(){
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    @ResponseBody
+    @RequestMapping("/checkLogin")
+    public Integer checkLogin(){
+        return 0;
+    }
 
 
 }
