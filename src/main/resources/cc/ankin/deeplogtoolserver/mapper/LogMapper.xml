@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cc.ankin.deeplogtoolserver.mapper.LogMapper">
+
+    <select id="getLogListByUserId" resultType="cc.ankin.deeplogtoolserver.pojo.Log">
+        select *
+        from DeepLogTool.Log
+        where userId = #{userId}
+    </select>
+
+    <insert id="insetLog" parameterType="cc.ankin.deeplogtoolserver.pojo.Log">
+        insert into DeepLogTool.Log(Id, userId, createTime, comments, done, accuracyBest, epochBest, epochNow)
+        value (#{Id}, #{userId}, #{createTime}, #{comments}, #{done}, #{accuracyBest}, #{epochBest}, #{epochNow});
+    </insert>
+
+
+</mapper>
