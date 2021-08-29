@@ -15,4 +15,7 @@ public class Log {
     private String title;
     private String comments;
     private Integer done;
+    private String dataset;
+    private String task;
+    private Integer epoch;
 }

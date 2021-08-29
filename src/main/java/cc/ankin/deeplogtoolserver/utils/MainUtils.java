@@ -165,5 +165,22 @@ public class MainUtils {
         return 0;
     }
 
+    @ResponseBody
+    @RequestMapping("/doneLog")
+    public Integer doneLog(String logId){
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        LogMapper logMapper = sqlSession.getMapper(LogMapper.class);
+
+        Log log = logMapper.getLogById(logId);
+        log.setDone(1);
+        logMapper.updateLog(log);
+
+        sqlSession.commit();
+        sqlSession.close();
+
+        return 0;
+    }
+
+
 
 }

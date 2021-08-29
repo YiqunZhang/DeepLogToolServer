@@ -16,5 +16,23 @@
         value (#{id}, #{userId}, #{createTime}, #{comments}, #{done}, #{title});
     </insert>
 
+    <update id="updateLog" parameterType="cc.ankin.deeplogtoolserver.pojo.Log">
+        update DeepLogTool.Log
+        set userId=#{userId},
+            createTime=#{createTime},
+            comments=#{comments},
+            done=#{done},
+            title=#{title}
+
+        where id = #{id};
+
+    </update>
+
+    <select id="getLogById" parameterType="String" resultType="cc.ankin.deeplogtoolserver.pojo.Log">
+        select *
+        from DeepLogTool.Log
+        where id = #{id}
+    </select>
+
 
 </mapper>
