@@ -1,8 +1,10 @@
 package cc.ankin.deeplogtoolserver.utils;
 
+import cc.ankin.deeplogtoolserver.mapper.LogDetailMapper;
 import cc.ankin.deeplogtoolserver.mapper.LogMapper;
 import cc.ankin.deeplogtoolserver.mapper.UserMapper;
 import cc.ankin.deeplogtoolserver.pojo.Log;
+import cc.ankin.deeplogtoolserver.pojo.LogDetail;
 import cc.ankin.deeplogtoolserver.pojo.User;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -58,18 +60,6 @@ public class MainUtils {
     }
 
 
-    @ResponseBody
-    @RequestMapping("/signIn")
-    public Object signIn(String username, String password) {
-        Integer res = MainUtils.getInstance().checkPassword(username, password);
-        if (res == 0) {
-            return res;
-        } else {
-            return res;
-        }
-
-    }
-
     public List<Log> getLogListByUserId(String userId) {
         SqlSession sqlSession = MybatisUtils.getSqlSession();
         LogMapper logMapper = sqlSession.getMapper(LogMapper.class);
@@ -81,10 +71,11 @@ public class MainUtils {
 
     @ResponseBody
     @RequestMapping("/createNewLog")
-    public Object createNewLog(String title, String comments, Long timestamp) {
+    public String createNewLog(String title, String comments, Long timestamp) {
+        String id = ToolUtils.getRandomUUID();
 
         Log log = new Log(
-                ToolUtils.getRandomUUID(),
+                id,
                 whoAmI().getId(),
                 timestamp,
                 title,
@@ -101,9 +92,39 @@ public class MainUtils {
         sqlSession.commit();
         sqlSession.close();
 
-        return "success";
+        return id;
     }
 
+
+    @ResponseBody
+    @RequestMapping("/whoAmI")
+    public String uploadLogDetail(String logId, Integer epoch, Double accuracy,
+                                   Double trainLoss, Double testLoss, Double learningRate,
+                                   Double startTime, Double trainTime, Double testTime){
+
+        String id = ToolUtils.getRandomUUID();
+
+        LogDetail logDetail = new LogDetail(
+                id,
+                logId,
+                epoch,
+                accuracy,
+                trainLoss,
+                testLoss,
+                learningRate,
+                startTime,
+                trainTime,
+                testTime
+        );
+
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        LogDetailMapper logDetailMapper = sqlSession.getMapper(LogDetailMapper.class);
+        logDetailMapper.insertLogDetail(logDetail);
+        sqlSession.commit();
+        sqlSession.close();
+
+        return id;
+    }
 
 
     @ResponseBody
