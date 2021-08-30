@@ -12,8 +12,8 @@
     </select>
 
     <insert id="insertLog" parameterType="cc.ankin.deeplogtoolserver.pojo.Log">
-        insert into DeepLogTool.Log(id, userId, createTime, comments, done, title)
-        value (#{id}, #{userId}, #{createTime}, #{comments}, #{done}, #{title});
+        insert into DeepLogTool.Log(id, userId, createTime, comments, done, title, task, dataset, epoch)
+        value (#{id}, #{userId}, #{createTime}, #{comments}, #{done}, #{title}, #{task}, #{dataset}, #{epoch});
     </insert>
 
     <update id="updateLog" parameterType="cc.ankin.deeplogtoolserver.pojo.Log">
@@ -22,7 +22,10 @@
             createTime=#{createTime},
             comments=#{comments},
             done=#{done},
-            title=#{title}
+            title=#{title},
+            task=#{task},
+            dataset=#{dataset},
+            epoch=#{epoch}
 
         where id = #{id};
 

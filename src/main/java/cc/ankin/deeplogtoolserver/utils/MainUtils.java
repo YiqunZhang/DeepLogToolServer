@@ -1,22 +1,22 @@
 package cc.ankin.deeplogtoolserver.utils;
 
-import cc.ankin.deeplogtoolserver.mapper.ConfigMapper;
-import cc.ankin.deeplogtoolserver.mapper.LogDetailMapper;
-import cc.ankin.deeplogtoolserver.mapper.LogMapper;
-import cc.ankin.deeplogtoolserver.mapper.UserMapper;
-import cc.ankin.deeplogtoolserver.pojo.Config;
-import cc.ankin.deeplogtoolserver.pojo.Log;
-import cc.ankin.deeplogtoolserver.pojo.LogDetail;
-import cc.ankin.deeplogtoolserver.pojo.User;
+import cc.ankin.deeplogtoolserver.mapper.*;
+import cc.ankin.deeplogtoolserver.pojo.*;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 
 import javax.xml.ws.ResponseWrapper;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -73,7 +73,7 @@ public class MainUtils {
 
     @ResponseBody
     @RequestMapping("/createNewLog")
-    public String createNewLog(String title, String comments, Long timestamp) {
+    public String createNewLog(String title, String comments, Long timestamp, String dataset, String task, Integer epoch) {
         String id = ToolUtils.getRandomUUID();
 
         Log log = new Log(
@@ -82,7 +82,11 @@ public class MainUtils {
                 timestamp,
                 title,
                 comments,
-                0
+                0,
+                dataset,
+                task,
+                epoch
+
         );
 
         SqlSession sqlSession = MybatisUtils.getSqlSession();
@@ -181,6 +185,42 @@ public class MainUtils {
         return 0;
     }
 
+    @ResponseBody
+    @PostMapping("/upload")
+    public String upload(@RequestParam("file") MultipartFile file, String logId, String comment ) {
+        String storePath = "/Users/zhangyiqun/Desktop/testfile/";
+        String storeName = ToolUtils.getRandomUUID();
+
+        if (file.isEmpty()) {
+            return "2"; //文件为空
+        }
+
+        String fileName = file.getOriginalFilename();
+        FileDetail fileDetail = new FileDetail(storeName, logId, fileName, comment);
+
+        File dest = new File(storePath + storeName);
+
+
+        try {
+            file.transferTo(dest);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "1"; //上传失败
+
+        }
+
+        SqlSession sqlSession = MybatisUtils.getSqlSession();
+        FileDetailMapper fileDetailMapper = sqlSession.getMapper(FileDetailMapper.class);
+
+        fileDetailMapper.insertFileDetail(fileDetail);
+
+        sqlSession.commit();
+        sqlSession.close();
+
+        return "0"; //上传成功
+
+    }
 
 
 }

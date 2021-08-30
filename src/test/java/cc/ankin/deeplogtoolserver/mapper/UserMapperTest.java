@@ -53,7 +53,7 @@ public class UserMapperTest {
     public void insertUser(){
         SqlSession  sqlSession = MybatisUtils.getSqlSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        User user = new User(UUID.randomUUID().toString(),"15098144981", ToolUtils.pwdEncoder("2312"));
+        User user = new User(UUID.randomUUID().toString(),"test2", ToolUtils.pwdEncoder("test"));
         userMapper.insetUser(user);
         sqlSession.commit();
         sqlSession.close();

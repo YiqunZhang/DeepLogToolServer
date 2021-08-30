@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="cc.ankin.deeplogtoolserver.mapper.LogDetailMapper">
 
 
-    <insert id="insertLogDetail" parameterType="cc.ankin.deeplogtoolserver.pojo.LogDetail">
-        insert into DeepLogTool.LogDetail(id, logId, epoch, accuracy, trainLoss, testLoss, learningRate, startTime, trainTime, testTime)
-            value (#{id}, #{logId}, #{epoch}, #{accuracy}, #{trainLoss}, #{testLoss}, #{learningRate}, #{startTime}, #{trainTime}, #{testTime});
-    </insert>
+<insert id="insertLogDetail" parameterType="cc.ankin.deeplogtoolserver.pojo.LogDetail">
+    insert into DeepLogTool.LogDetail(id, logId, epoch, accuracy, trainLoss, testLoss, learningRate, startTime, trainTime, testTime)
+        value (#{id}, #{logId}, #{epoch}, #{accuracy}, #{trainLoss}, #{testLoss}, #{learningRate}, #{startTime}, #{trainTime}, #{testTime});
+</insert>
 
 
 </mapper>
