@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Config</title>
+</head>
+<body>
+    <a href="/index">Index</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Config ID</th>
+            <th>Name</th>
+            <th>Value</th>
+
+        </tr>
+        <tr  th:each="configOV : ${configOVList}" >
+            <td th:text="${configOV.id}"></td>
+            <td th:text="${configOV.name}"></td>
+            <td th:text="${configOV.value}"></td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

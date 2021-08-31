@@ -6,10 +6,18 @@
 <mapper namespace="cc.ankin.deeplogtoolserver.mapper.LogDetailMapper">
 
 
-<insert id="insertLogDetail" parameterType="cc.ankin.deeplogtoolserver.pojo.LogDetail">
-    insert into DeepLogTool.LogDetail(id, logId, epoch, accuracy, trainLoss, testLoss, learningRate, startTime, trainTime, testTime)
-        value (#{id}, #{logId}, #{epoch}, #{accuracy}, #{trainLoss}, #{testLoss}, #{learningRate}, #{startTime}, #{trainTime}, #{testTime});
-</insert>
+    <insert id="insertLogDetail" parameterType="cc.ankin.deeplogtoolserver.pojo.LogDetail">
+        insert into DeepLogTool.LogDetail(id, logId, epoch, accuracy, trainLoss, testLoss, learningRate, startTime, trainTime, testTime)
+            value (#{id}, #{logId}, #{epoch}, #{accuracy}, #{trainLoss}, #{testLoss}, #{learningRate}, #{startTime}, #{trainTime}, #{testTime});
+    </insert>
+
+    <select id="getLogDetailByLogId" resultType="cc.ankin.deeplogtoolserver.pojo.LogDetail">
+        select *
+        from DeepLogTool.LogDetail
+        where logId = #{logId}
+    </select>
+
+
 
 
 </mapper>

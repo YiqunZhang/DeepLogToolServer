@@ -15,7 +15,7 @@ public class LogDetail {
     private Double trainLoss;
     private Double testLoss;
     private Double learningRate;
-    private Double startTime;
-    private Double trainTime;
-    private Double testTime;
+    private Long startTime;
+    private Long trainTime;
+    private Long testTime;
 }

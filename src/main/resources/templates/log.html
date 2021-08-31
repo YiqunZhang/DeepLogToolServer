@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log</title>
+</head>
+<body>
+    <a href="/index">Index</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Log ID</th>
+            <th>Config</th>
+            <th>File</th>
+            <th>Title</th>
+            <th>Create Time</th>
+            <th>Done</th>
+            <th>Epoch</th>
+            <th>Dataset</th>
+            <th>Task</th>
+            <th>Comment</th>
+
+        </tr>
+        <tr  th:each="logOV : ${logOVList}" >
+            <td ><a th:text="${logOV.id}" th:href="'/logDetail?logId=' + ${logOV.id}"></a></td>
+            <td ><a th:text="Config" th:href="'/config?logId=' + ${logOV.id}"></a></td>
+            <td ><a th:text="File" th:href="'/fileDetail?logId=' + ${logOV.id}"></a></td>
+            <td th:text="${logOV.title}"></td>
+            <td th:text="${logOV.createTime}"></td>
+            <td th:text="${logOV.done}"></td>
+            <td th:text="${logOV.epoch}"></td>
+            <td th:text="${logOV.dataset}"></td>
+            <td th:text="${logOV.task}"></td>
+            <td th:text="${logOV.comments}"></td>
+        </tr>
+    </table>
+
+
+
+</body>
+</html>

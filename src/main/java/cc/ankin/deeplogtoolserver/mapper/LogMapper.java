@@ -10,5 +10,6 @@ public interface LogMapper {
     void updateLog(Log log);
     Log getLogById(String id);
     List<Log> getLogListByUserId(String UserId);
+    List<Log> getLogListByUserIdDone(String UserId);
 
 }

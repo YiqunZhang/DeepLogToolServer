@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log Detail</title>
+</head>
+<body>
+    <a href="/index">Index</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>Log Detail ID</th>
+            <th>Epoch</th>
+            <th>Accuracy</th>
+            <th>TrainLoss</th>
+            <th>TestLoss</th>
+            <th>Learning Rate</th>
+            <th>Start Time</th>
+            <th>Train Time</th>
+            <th>Test Time</th>
+
+        </tr>
+        <tr  th:each="logDetailOV : ${logDetailOVList}" >
+            <td th:text="${logDetailOV.id}"></td>
+            <td th:text="${logDetailOV.epoch}"></td>
+            <td th:text="${logDetailOV.accuracy}"></td>
+            <td th:text="${logDetailOV.trainLoss}"></td>
+            <td th:text="${logDetailOV.testLoss}"></td>
+            <td th:text="${logDetailOV.learningRate}"></td>
+            <td th:text="${logDetailOV.startTime}"></td>
+            <td th:text="${logDetailOV.trainTime}"></td>
+            <td th:text="${logDetailOV.testTime}"></td>
+        </tr>
+    </table>
+
+
+</body>
+</html>

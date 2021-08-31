@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log Detail</title>
+</head>
+<body>
+    <a href="/index">Index</a>
+    <br>
+    <table border="1">
+        <tr>
+            <th>File ID</th>
+            <th>File Name</th>
+            <th>Comment</th>
+
+
+        </tr>
+        <tr  th:each="fileDetailOV : ${fileDetailOVList}" >
+            <td ><a th:text="${fileDetailOV.id}" th:href="'/download?id=' + ${fileDetailOV.id}"></a></td>
+            <td th:text="${fileDetailOV.filename}"></td>
+            <td th:text="${fileDetailOV.comment}"></td>
+
+        </tr>
+    </table>
+
+
+</body>
+</html>

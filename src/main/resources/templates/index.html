@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Index</title>
 </head>
 <body>
-<!-- 使用th:text属性输出 -->
-<div th:text="${message}" ></div>
+    <a href="/log?done=false">Log List (All)</a>
+    <br>
+    <a href="/log?done=true">Log List (Done)</a>
+    <br>
+    <a href="/logout">Log Out</a>
+
+
+
 </body>
 </html>

@@ -11,5 +11,16 @@
             value (#{id}, #{filename}, #{comment}, #{logId});
     </insert>
 
+    <select id="getFileDetailByLogId" resultType="cc.ankin.deeplogtoolserver.pojo.FileDetail">
+        select *
+        from DeepLogTool.FileDetail
+        where logId = #{logId}
+    </select>
 
+
+    <select id="getFileDetailById" parameterType="String" resultType="cc.ankin.deeplogtoolserver.pojo.FileDetail">
+        select *
+        from DeepLogTool.FileDetail
+        where id = #{id}
+    </select>
 </mapper>

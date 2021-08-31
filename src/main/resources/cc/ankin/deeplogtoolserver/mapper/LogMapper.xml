@@ -37,5 +37,12 @@
         where id = #{id}
     </select>
 
+    <select id="getLogListByUserIdDone" resultType="cc.ankin.deeplogtoolserver.pojo.Log">
+        select *
+        from DeepLogTool.Log
+        where userId = #{userId}
+        and done = 1
+    </select>
+
 
 </mapper>

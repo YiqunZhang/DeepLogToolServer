@@ -11,5 +11,11 @@
             value (#{id}, #{logId}, #{name}, #{value});
     </insert>
 
+    <select id="getConfigByLogId" resultType="cc.ankin.deeplogtoolserver.pojo.Config">
+        select *
+        from DeepLogTool.Config
+        where logId = #{logId}
+    </select>
+
 
 </mapper>
