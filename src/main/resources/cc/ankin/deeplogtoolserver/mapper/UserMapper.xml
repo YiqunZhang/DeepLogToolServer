@@ -7,29 +7,29 @@
 
     <select id="getUserList" resultType="cc.ankin.deeplogtoolserver.pojo.User">
         select *
-        from user
+        from DeepLogTool.User
     </select>
 
     <select id="getUserById" parameterType="String" resultType="cc.ankin.deeplogtoolserver.pojo.User">
         select *
-        from user
+        from DeepLogTool.User
         where id = #{id}
     </select>
 
     <select id="getUserByUsername" parameterType="String" resultType="cc.ankin.deeplogtoolserver.pojo.User">
         select *
-        from user
+        from DeepLogTool.User
         where username = #{username}
     </select>
 
     <insert id="insetUser" parameterType="cc.ankin.deeplogtoolserver.pojo.User">
-        insert into user (id, username, password)
+        insert into DeepLogTool.User (id, username, password)
         values (#{id}, #{username}, #{password});
     </insert>
 
 
     <update id="updateUser" parameterType="cc.ankin.deeplogtoolserver.pojo.User">
-        update user
+        update DeepLogTool.User
         set username=#{username},
             password=#{password}
         where id = #{id};

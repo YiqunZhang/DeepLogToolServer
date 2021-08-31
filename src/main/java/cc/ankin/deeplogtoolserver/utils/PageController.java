@@ -26,6 +26,8 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -38,11 +40,19 @@ public class PageController {
 
         List<Config> configList = MainUtils.getInstance().getConfigByLogId(logId);
 
+        Collections.sort(configList, new Comparator<Config>() {
+
+            @Override
+            public int compare(Config o1, Config o2) {
+                return o1.getName().compareTo(o2.getName());
+
+            }
+        });
+
 
         for (Config config : configList) {
             configOVList.add(new ConfigOV(config));
         }
-        System.out.println(configOVList.size());
 
         model.addAttribute("configOVList", configOVList);
         return "config";
@@ -64,6 +74,16 @@ public class PageController {
             logList = MainUtils.getInstance().getLogListMine();
         }
 
+        Collections.sort(logList, new Comparator<Log>() {
+
+            @Override
+            public int compare(Log o1, Log o2) {
+                return o2.getCreateTime().compareTo(o1.getCreateTime());
+
+            }
+        });
+
+
 
         for (Log log : logList) {
             logOVList.add(new LogOV(log));
@@ -79,6 +99,13 @@ public class PageController {
 
         List<LogDetail> logDetailList = MainUtils.getInstance().getLogDetailByLogId(logId);
 
+        Collections.sort(logDetailList, new Comparator<LogDetail>() {
+
+            @Override
+            public int compare(LogDetail o1, LogDetail o2) {
+                return o1.getEpoch()-o2.getEpoch();
+            }
+        });
 
         for (LogDetail logDetail : logDetailList) {
             logDetailOVList.add(new LogDetailOV(logDetail));
@@ -90,6 +117,7 @@ public class PageController {
 
     @GetMapping("/fileDetail")
     public String fileDetail(Model model, String logId) {
+
         List<FileDetailOV> fileDetailOVList = new ArrayList<FileDetailOV>();
 
         List<FileDetail> fileDetailList = MainUtils.getInstance().getFileDetailByLogId(logId);

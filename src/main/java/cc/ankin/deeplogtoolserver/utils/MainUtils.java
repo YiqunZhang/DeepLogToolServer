@@ -25,7 +25,7 @@ import java.util.List;
 @Controller
 public class MainUtils {
 
-    private static final String FILE_PATH = "/Users/zhangyiqun/Desktop/testfile/";
+    private static final String FILE_PATH = "/home/ankin/DeepLogToolFile/";
 
     private String randomCode = "";
     private static MainUtils instance = new MainUtils();
